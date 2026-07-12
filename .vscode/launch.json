@@ -1,0 +1,115 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Demo1Application<demo1>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.zxylearn.demo1.Demo1Application",
+            "projectName": "demo1",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-CartServiceApplication<cart-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.zxylearn.demo1.cart.CartServiceApplication",
+            "projectName": "cart-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EurekaServerAApplication<eureka-server-a>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.zxylearn.demo1.eureka.servera.EurekaServerAApplication",
+            "projectName": "eureka-server-a",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EurekaServerBApplication<eureka-server-b>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.zxylearn.demo1.eureka.serverb.EurekaServerBApplication",
+            "projectName": "eureka-server-b",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=46783 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=eureka-server-b"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-InventoryServiceApplication<inventory-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.zxylearn.demo1.inventory.InventoryServiceApplication",
+            "projectName": "inventory-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-OrderServiceApplication<order-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.zxylearn.demo1.order.OrderServiceApplication",
+            "projectName": "order-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ProductServiceApplication<product-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.zxylearn.demo1.product.ProductServiceApplication",
+            "projectName": "product-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EurekaCartServiceApplication<eureka-cart-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.zxylearn.demo1.eurekacart.EurekaCartServiceApplication",
+            "projectName": "eureka-cart-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EurekaProductServiceApplication<eureka-product-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.zxylearn.demo1.eurekaproduct.EurekaProductServiceApplication",
+            "projectName": "eureka-product-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-CartServiceApplication<nacos-cart-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.zxylearn.demo1.cart.CartServiceApplication",
+            "projectName": "nacos-cart-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ProductServiceApplication<nacos-product-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.zxylearn.demo1.product.ProductServiceApplication",
+            "projectName": "nacos-product-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
