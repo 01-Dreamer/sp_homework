@@ -1,0 +1,44 @@
+server:
+  port: ${SERVER_PORT:8300}
+
+spring:
+  application:
+    name: demo5-config-server
+  profiles:
+    active: ${CONFIG_SERVER_PROFILE:native}
+  cloud:
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+      username: ${NACOS_USERNAME:}
+      password: ${NACOS_PASSWORD:}
+      discovery:
+        group: ${NACOS_GROUP:DEMO5}
+        namespace: ${NACOS_NAMESPACE:}
+    config:
+      server:
+        native:
+          search-locations:
+            - file:${CONFIG_REPO_PATH:${user.dir}/config-repo}
+            - file:${CONFIG_REPO_PATH:${user.dir}/../config-repo}
+        git:
+          uri: ${CONFIG_GIT_URI:https://github.com/01-Dreamer/config-repo.git}
+          default-label: ${CONFIG_GIT_LABEL:main}
+          username: ${CONFIG_GIT_USERNAME:}
+          password: ${CONFIG_GIT_PASSWORD:}
+          clone-on-start: true
+          force-pull: true
+          refresh-rate: 0
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,busrefresh,busenv
+  endpoint:
+    health:
+      show-details: always

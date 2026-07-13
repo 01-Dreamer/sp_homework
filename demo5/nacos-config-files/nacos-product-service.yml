@@ -1,0 +1,9 @@
+server:
+  port: 8321
+
+demo5:
+  product:
+    message: Nacos 配置中心中的商品配置
+    version: nacos-product-v1
+    discount-rate: 0.85
+    currency: CNY

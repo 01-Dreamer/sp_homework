@@ -1,0 +1,8 @@
+server:
+  port: 8322
+
+demo5:
+  cart:
+    message: Nacos 配置中心中的购物车配置
+    version: nacos-cart-v1
+    delivery-fee: 3.00

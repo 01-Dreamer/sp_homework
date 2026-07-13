@@ -1,0 +1,33 @@
+server:
+  port: 8322
+
+spring:
+  application:
+    name: nacos-cart-service
+  config:
+    import:
+      - "optional:nacos:nacos-cart-service.yml?group=DEMO5&refreshEnabled=true"
+  cloud:
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+      username: ${NACOS_USERNAME:}
+      password: ${NACOS_PASSWORD:}
+      config:
+        group: ${NACOS_GROUP:DEMO5}
+        file-extension: yml
+        namespace: ${NACOS_NAMESPACE:}
+      discovery:
+        group: ${NACOS_GROUP:DEMO5}
+        namespace: ${NACOS_NAMESPACE:}
+
+demo5:
+  cart:
+    message: Nacos 本地兜底购物车配置
+    version: nacos-cart-local
+    delivery-fee: 6.00
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,refresh

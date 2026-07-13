@@ -13,7 +13,7 @@ export const options = {
 };
 
 const baseUrl = __ENV.BASE_URL || 'http://localhost:8200';
-const headers = { 'X-Token': __ENV.TOKEN || 'API_KEY_PLACEHOLDER' };
+const headers = { 'X-Token': __ENV.TOKEN || 'change-me-gateway-token' };
 
 export default function () {
   const res = http.get(`${baseUrl}/api/products/4001`, { headers });

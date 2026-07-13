@@ -6,10 +6,10 @@ spring:
     name: demo4-gateway-service
   cloud:
     nacos:
-      username: ${NACOS_USERNAME:nacos}
-      password: ${NACOS_PASSWORD:20230607}
+      username: ${NACOS_USERNAME:}
+      password: ${NACOS_PASSWORD:}
       discovery:
-        server-addr: ${NACOS_SERVER_ADDR:SERVER_IP_PLACEHOLDER:8848}
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
         group: DEMO4
         metadata:
           module: api-gateway
@@ -68,9 +68,9 @@ spring:
                     statusCodes: 500
 
 demo4:
-  internal-token: ${DEMO4_INTERNAL_TOKEN:demo4-internal-token}
+  internal-token: ${DEMO4_INTERNAL_TOKEN:change-me-internal-token}
   gateway:
-    auth-token: ${DEMO4_GATEWAY_TOKEN:API_KEY_PLACEHOLDER}
+    auth-token: ${DEMO4_GATEWAY_TOKEN:change-me-gateway-token}
     rate-limit:
       max-requests: 8
       window: 5s

@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: config-product-service
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      name: config-product-service
+      profile: default
+      label: ${CONFIG_LABEL:main}
+      fail-fast: false
+      discovery:
+        enabled: true
+        service-id: demo5-config-server
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+      username: ${NACOS_USERNAME:}
+      password: ${NACOS_PASSWORD:}
+      discovery:
+        group: ${NACOS_GROUP:DEMO5}
+        namespace: ${NACOS_NAMESPACE:}

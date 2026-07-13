@@ -11,10 +11,10 @@ spring:
       spec: maximumSize=100,expireAfterWrite=60s
   cloud:
     nacos:
-      username: ${NACOS_USERNAME:nacos}
-      password: ${NACOS_PASSWORD:20230607}
+      username: ${NACOS_USERNAME:}
+      password: ${NACOS_PASSWORD:}
       discovery:
-        server-addr: ${NACOS_SERVER_ADDR:SERVER_IP_PLACEHOLDER:8848}
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
         group: DEMO3
         metadata:
           module: order-consumer

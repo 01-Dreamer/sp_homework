@@ -6,8 +6,8 @@ spring:
     name: nacos-product-service
   cloud:
     nacos:
-      username: ${NACOS_USERNAME:nacos}
-      password: ${NACOS_PASSWORD:20230607}
+      username: ${NACOS_USERNAME:}
+      password: ${NACOS_PASSWORD:}
       discovery:
         server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848,127.0.0.1:18848,127.0.0.1:28848}
         group: DEMO1

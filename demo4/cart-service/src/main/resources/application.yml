@@ -6,17 +6,17 @@ spring:
     name: demo4-cart-service
   cloud:
     nacos:
-      username: ${NACOS_USERNAME:nacos}
-      password: ${NACOS_PASSWORD:20230607}
+      username: ${NACOS_USERNAME:}
+      password: ${NACOS_PASSWORD:}
       discovery:
-        server-addr: ${NACOS_SERVER_ADDR:SERVER_IP_PLACEHOLDER:8848}
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
         group: DEMO4
         metadata:
           module: cart-provider
           version: 1.0.0
 
 demo4:
-  internal-token: ${DEMO4_INTERNAL_TOKEN:demo4-internal-token}
+  internal-token: ${DEMO4_INTERNAL_TOKEN:change-me-internal-token}
 
 management:
   endpoints:
