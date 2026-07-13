@@ -1,0 +1,27 @@
+server:
+  port: 8201
+
+spring:
+  application:
+    name: demo4-product-service
+  cloud:
+    nacos:
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:20230607}
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:SERVER_IP_PLACEHOLDER:8848}
+        group: DEMO4
+        metadata:
+          module: product-provider
+          instance: product-service-a
+          version: 1.0.0
+
+demo4:
+  instance-name: product-service-a
+  internal-token: ${DEMO4_INTERNAL_TOKEN:demo4-internal-token}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

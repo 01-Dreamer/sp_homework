@@ -1,0 +1,25 @@
+server:
+  port: 8203
+
+spring:
+  application:
+    name: demo4-cart-service
+  cloud:
+    nacos:
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:20230607}
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:SERVER_IP_PLACEHOLDER:8848}
+        group: DEMO4
+        metadata:
+          module: cart-provider
+          version: 1.0.0
+
+demo4:
+  internal-token: ${DEMO4_INTERNAL_TOKEN:demo4-internal-token}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

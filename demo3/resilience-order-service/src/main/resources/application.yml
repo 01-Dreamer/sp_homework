@@ -1,0 +1,76 @@
+server:
+  port: 8113
+
+spring:
+  application:
+    name: resilience-order-service
+  cache:
+    type: caffeine
+    cache-names: productResultCache
+    caffeine:
+      spec: maximumSize=100,expireAfterWrite=60s
+  cloud:
+    nacos:
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:20230607}
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:SERVER_IP_PLACEHOLDER:8848}
+        group: DEMO3
+        metadata:
+          module: order-consumer
+          business-service: resilience-order-service
+          registry: nacos
+          version: 1.0.0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,circuitbreakers,ratelimiters,bulkheads
+  health:
+    circuitbreakers:
+      enabled: true
+    ratelimiters:
+      enabled: true
+    timelimiters:
+      enabled: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      circuitBreakerA:
+        failureRateThreshold: 30
+        slidingWindowType: TIME_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+        registerHealthIndicator: true
+      circuitBreakerB:
+        failureRateThreshold: 50
+        slowCallRateThreshold: 30
+        slowCallDurationThreshold: 2s
+        slidingWindowType: TIME_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+        registerHealthIndicator: true
+  bulkhead:
+    instances:
+      inventoryBulkhead:
+        maxConcurrentCalls: 10
+        maxWaitDuration: 20ms
+  ratelimiter:
+    instances:
+      productRateLimiter:
+        limitRefreshPeriod: 2s
+        limitForPeriod: 5
+        timeoutDuration: 0
+  timelimiter:
+    instances:
+      inventoryTimeout:
+        timeoutDuration: 1s
+        cancelRunningFuture: true

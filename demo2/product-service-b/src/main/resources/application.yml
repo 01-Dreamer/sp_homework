@@ -1,0 +1,24 @@
+server:
+  port: 8093
+
+spring:
+  application:
+    name: product-service
+  cloud:
+    nacos:
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:20230607}
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:SERVER_IP_PLACEHOLDER:8848}
+        group: DEMO2
+        metadata:
+          module: product-provider
+          instance: product-b
+          priority: 2
+          business-service: product-service
+          registry: nacos
+          version: 1.0.0
+
+demo2:
+  instance-id: product-b
+  registry: nacos

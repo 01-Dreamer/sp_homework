@@ -1,0 +1,26 @@
+server:
+  port: 8092
+
+spring:
+  application:
+    name: cart-service
+  cloud:
+    nacos:
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:20230607}
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:SERVER_IP_PLACEHOLDER:8848}
+        group: DEMO2
+        metadata:
+          module: cart-consumer
+          business-service: cart-service
+          registry: nacos
+          version: 1.0.0
+    loadbalancer:
+      eager-load:
+        clients:
+          - product-service
+
+demo2:
+  product-service-id: product-service
+  registry: nacos

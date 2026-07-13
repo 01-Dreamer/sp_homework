@@ -1,0 +1,18 @@
+server:
+  port: 8111
+
+spring:
+  application:
+    name: product-service
+  cloud:
+    nacos:
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:20230607}
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:SERVER_IP_PLACEHOLDER:8848}
+        group: DEMO3
+        metadata:
+          module: product-provider
+          business-service: product-service
+          registry: nacos
+          version: 1.0.0

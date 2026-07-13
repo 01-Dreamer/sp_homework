@@ -1,0 +1,23 @@
+server:
+  port: 8114
+
+spring:
+  application:
+    name: sentinel-order-service
+  cloud:
+    nacos:
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:20230607}
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:SERVER_IP_PLACEHOLDER:8848}
+        group: DEMO3
+        metadata:
+          module: sentinel-order-consumer
+          business-service: sentinel-order-service
+          registry: nacos
+          version: 1.0.0
+    sentinel:
+      eager: true
+      transport:
+        dashboard: ${SENTINEL_DASHBOARD:127.0.0.1:8858}
+        port: 8719

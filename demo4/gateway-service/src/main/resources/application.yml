@@ -1,0 +1,106 @@
+server:
+  port: 8200
+
+spring:
+  application:
+    name: demo4-gateway-service
+  cloud:
+    nacos:
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:20230607}
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:SERVER_IP_PLACEHOLDER:8848}
+        group: DEMO4
+        metadata:
+          module: api-gateway
+          version: 1.0.0
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+          globalcors:
+            add-to-simple-url-handler-mapping: true
+            cors-configurations:
+              '[/**]':
+                allowedOriginPatterns:
+                  - "*"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - OPTIONS
+                allowedHeaders:
+                  - "*"
+                exposedHeaders:
+                  - X-Gateway-Route
+                  - X-RateLimit-Limit
+                  - X-RateLimit-Remaining
+                allowCredentials: false
+                maxAge: 3600
+          routes:
+            - id: product-route
+              uri: lb://demo4-product-service
+              predicates:
+                - Path=/api/products/**
+              filters:
+                - AddRequestHeader=X-Internal-Toekn, ${demo4.internal-token}
+                - AddResponseHeader=X-Gateway-Route, product-route
+                - name: CircuitBreaker
+                  args:
+                    name: productGatewayCircuitBreaker
+                    fallbackUri: forward:/fallback/products
+                    statusCodes: 500
+            - id: cart-route
+              uri: lb://demo4-cart-service
+              predicates:
+                - Path=/api/carts/**
+              filters:
+                - AddRequestHeader=X-Internal-Toekn, ${demo4.internal-token}
+                - AddResponseHeader=X-Gateway-Route, cart-route
+                - name: CircuitBreaker
+                  args:
+                    name: cartGatewayCircuitBreaker
+                    fallbackUri: forward:/fallback/carts
+                    statusCodes: 500
+
+demo4:
+  internal-token: ${DEMO4_INTERNAL_TOKEN:demo4-internal-token}
+  gateway:
+    auth-token: ${DEMO4_GATEWAY_TOKEN:API_KEY_PLACEHOLDER}
+    rate-limit:
+      max-requests: 8
+      window: 5s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway,circuitbreakers
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      productGatewayCircuitBreaker:
+        failureRateThreshold: 50
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 6
+        minimumNumberOfCalls: 3
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 2
+      cartGatewayCircuitBreaker:
+        failureRateThreshold: 50
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 6
+        minimumNumberOfCalls: 3
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 2
+  timelimiter:
+    instances:
+      productGatewayCircuitBreaker:
+        timeoutDuration: 2s
+      cartGatewayCircuitBreaker:
+        timeoutDuration: 2s
